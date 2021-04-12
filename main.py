@@ -35,9 +35,16 @@ def distance_on_current_section(pair, t, timeVector, velocityVector):
     difference_of_time = pair[0] - t
     passed_time_on_current_section = timeVector[pair[1]] - difference_of_time
     passed_distance_on_current_section = velocityVector[pair[1] + 1] * passed_time_on_current_section
-    print(velocityVector[pair[1] + 1])
-    print(passed_time_on_current_section)
     return passed_distance_on_current_section
+
+
+def get_current_coordinates(pair, coordinatesVector, passed_distance_on_current_section, distanses):
+    coordinate_x = ((coordinatesVector[pair[1] + 1][0] - coordinatesVector[pair[1]][0]) * passed_distance_on_current_section)/distanses[pair[1]]
+    result_x = coordinatesVector[pair[1]][0] + coordinate_x
+    coordinate_y = ((coordinatesVector[pair[1] + 1][1] - coordinatesVector[pair[1]][1]) * passed_distance_on_current_section) / distanses[pair[1]]
+    result_y = coordinatesVector[pair[1]][1] + coordinate_y
+    result_coordinates = (result_x, result_y)
+    return result_coordinates
 
 
 if __name__ == '__main__':
@@ -50,12 +57,12 @@ if __name__ == '__main__':
 
     velocityVector = [0, 3, 2, 5, 1]
 
+    t = 2.5
+
     dist = calculate_distance(coordinatesVector)
     time = calculate_time(dist, velocityVector)
-    cur_vec = define_current_vector(time, 2.5)
-    cur_dist = distance_on_current_section(cur_vec, 2.5, time, velocityVector)
-    print(dist)
-    print(time)
-    print(cur_vec[0], cur_vec[1])
-    print(cur_dist)
+    cur_vec = define_current_vector(time, t)
+    cur_dist = distance_on_current_section(cur_vec, t, time, velocityVector)
+    finish_coordinates = get_current_coordinates(cur_vec, coordinatesVector, cur_dist, dist)
+    print(finish_coordinates)
 

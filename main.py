@@ -21,6 +21,16 @@ def calculate_time(radiusVector, velocityVector):
     return timeVector
 
 
+def define_current_vector(timesVector, t):
+    n = 0
+    current_time = 0
+    for item in timesVector:
+        current_time += item
+        if current_time >= t: break
+        n += 1
+    return (current_time, n)
+
+
 if __name__ == '__main__':
 
     coordinatesVector = [(0, 0),
@@ -33,5 +43,7 @@ if __name__ == '__main__':
 
     dist = calculate_distance(coordinatesVector)
     time = calculate_time(dist, velocityVector)
+    cur_vec = define_current_vector(time, 2.5)
     print(dist)
     print(time)
+    print(cur_vec[0], cur_vec[1])

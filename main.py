@@ -31,6 +31,15 @@ def define_current_vector(timesVector, t):
     return (current_time, n)
 
 
+def distance_on_current_section(pair, t, timeVector, velocityVector):
+    difference_of_time = pair[0] - t
+    passed_time_on_current_section = timeVector[pair[1]] - difference_of_time
+    passed_distance_on_current_section = velocityVector[pair[1] + 1] * passed_time_on_current_section
+    print(velocityVector[pair[1] + 1])
+    print(passed_time_on_current_section)
+    return passed_distance_on_current_section
+
+
 if __name__ == '__main__':
 
     coordinatesVector = [(0, 0),
@@ -44,6 +53,9 @@ if __name__ == '__main__':
     dist = calculate_distance(coordinatesVector)
     time = calculate_time(dist, velocityVector)
     cur_vec = define_current_vector(time, 2.5)
+    cur_dist = distance_on_current_section(cur_vec, 2.5, time, velocityVector)
     print(dist)
     print(time)
     print(cur_vec[0], cur_vec[1])
+    print(cur_dist)
+
